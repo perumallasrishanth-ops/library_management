@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">L</div><div><strong>LIBRARY</strong><span>MANAGEMENT SYSTEM</span></div></div>
+    <div class="side-label">WORKSPACE</div>
+    <nav>
+      <button class="nav-link active" data-page="dashboard"><span>▦</span> Dashboard</button>
+      <button class="nav-link" data-page="books"><span>▤</span> Books</button>
+      <button class="nav-link" data-page="members"><span>♙</span> Members</button>
+      <button class="nav-link" data-page="circulation"><span>⇄</span> Issue & Return</button>
+    </nav>
+    <div class="sidebar-bottom"><div class="online-dot"></div><span id="connectionText">Checking database…</span></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div><div class="eyebrow">LIBRARY PORTAL</div><h1 id="pageTitle">Dashboard</h1></div>
+      <div class="topbar-right"><span class="today" id="todayText"></span><div class="avatar">L</div></div>
+    </header>
+
+    <section class="page active" id="dashboardPage">
+      <div class="welcome">
+        <div><div class="eyebrow light">YOUR LIBRARY AT A GLANCE</div><h2>Knowledge begins<br>with a <em>single page.</em></h2><p>Manage your books, members and daily circulation in one place.</p></div>
+        <div class="welcome-art" aria-hidden="true"><div class="book book-one"></div><div class="book book-two"></div><div class="book book-three"></div><div class="plant">✦</div></div>
+      </div>
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-icon gold">▤</div><span>Total book titles</span><strong id="totalBooks">—</strong><small>Registered in catalogue</small></article>
+        <article class="stat-card"><div class="stat-icon green">▣</div><span>Available copies</span><strong id="availableCopies">—</strong><small>Ready to be issued</small></article>
+        <article class="stat-card"><div class="stat-icon blue">♙</div><span>Registered members</span><strong id="totalMembers">—</strong><small>Library membership</small></article>
+        <article class="stat-card"><div class="stat-icon purple">⇄</div><span>Active issues</span><strong id="activeIssues">—</strong><small>Currently borrowed</small></article>
+      </div>
+      <div class="section-heading"><div><div class="eyebrow">QUICK ACCESS</div><h3>What would you like to do?</h3></div></div>
+      <div class="quick-grid">
+        <button class="quick-card" data-go="books"><span class="quick-icon">＋</span><strong>Add a book</strong><small>Expand your catalogue</small><b>→</b></button>
+        <button class="quick-card" data-go="members"><span class="quick-icon">♙</span><strong>Register a member</strong><small>Create a library account</small><b>→</b></button>
+        <button class="quick-card" data-go="circulation"><span class="quick-icon">⇄</span><strong>Issue or return</strong><small>Manage book circulation</small><b>→</b></button>
+      </div>
+      <div class="section-heading recent-heading"><div><div class="eyebrow">LATEST ACTIVITY</div><h3>Recent issue records</h3></div><button class="text-button" data-go="circulation">View all →</button></div>
+      <div class="table-wrap"><table><thead><tr><th>BOOK</th><th>MEMBER</th><th>ISSUE DATE</th><th>STATUS</th></tr></thead><tbody id="recentIssues"><tr><td colspan="4" class="empty">Loading records…</td></tr></tbody></table></div>
+    </section>
+
+    <section class="page" id="booksPage">
+      <div class="page-intro"><div><div class="eyebrow">COLLECTION</div><h2>Book catalogue</h2><p>Add, browse and keep track of the library collection.</p></div></div>
+      <div class="content-grid">
+        <form class="panel form-panel" id="bookForm">
+          <h3>Add a new book</h3><p class="muted">Enter the book details below.</p>
+          <label>Book title <input name="title" required maxlength="150" placeholder="e.g. The Alchemist"></label>
+          <label>Author <input name="author" placeholder="Author name"></label>
+          <label>Category <input name="category" placeholder="e.g. Fiction"></label>
+          <label>Publisher <input name="publisher" placeholder="Publisher name"></label>
+          <label>Quantity <input name="quantity" type="number" min="0" value="1" required></label>
+          <button class="primary-button" type="submit">＋ Add book</button>
+        </form>
+        <div class="panel table-panel"><div class="panel-heading"><div><h3>All books</h3><p class="muted">Your current catalogue</p></div><input class="search" id="bookSearch" placeholder="Search books…"></div>
+          <div class="table-wrap"><table><thead><tr><th>ID</th><th>TITLE</th><th>AUTHOR</th><th>CATEGORY</th><th>AVAILABLE</th></tr></thead><tbody id="booksTable"><tr><td colspan="5" class="empty">Loading books…</td></tr></tbody></table></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="membersPage">
+      <div class="page-intro"><div><div class="eyebrow">COMMUNITY</div><h2>Library members</h2><p>Register students and manage member information.</p></div></div>
+      <div class="content-grid">
+        <form class="panel form-panel" id="memberForm">
+          <h3>Register a member</h3><p class="muted">Create a new library membership.</p>
+          <label>Full name <input name="name" required maxlength="100" placeholder="Member name"></label>
+          <label>Roll number <input name="roll_no" required maxlength="30" placeholder="e.g. 23CS101"></label>
+          <label>Email <input name="email" type="email" placeholder="name@example.com"></label>
+          <label>Phone <input name="phone" type="tel" maxlength="15" placeholder="Phone number"></label>
+          <button class="primary-button" type="submit">＋ Register member</button>
+        </form>
+        <div class="panel table-panel"><div class="panel-heading"><div><h3>All members</h3><p class="muted">Registered library users</p></div><input class="search" id="memberSearch" placeholder="Search members…"></div>
+          <div class="table-wrap"><table><thead><tr><th>ID</th><th>NAME</th><th>ROLL NO.</th><th>EMAIL</th><th>PHONE</th></tr></thead><tbody id="membersTable"><tr><td colspan="5" class="empty">Loading members…</td></tr></tbody></table></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="circulationPage">
+      <div class="page-intro"><div><div class="eyebrow">CIRCULATION DESK</div><h2>Issue & return</h2><p>Track borrowed books and update returns.</p></div></div>
+      <div class="panel issue-panel">
+        <form id="issueForm" class="issue-form">
+          <div><h3>Issue a book</h3><p class="muted">Select a member and an available book.</p></div>
+          <label>Member<select name="member_id" id="issueMember" required><option value="">Select member</option></select></label>
+          <label>Book<select name="book_id" id="issueBook" required><option value="">Select available book</option></select></label>
+          <button class="primary-button" type="submit">Issue book →</button>
+        </form>
+      </div>
+      <div class="panel table-panel records-panel"><div class="panel-heading"><div><h3>Issue history</h3><p class="muted">All current and previous transactions</p></div><input class="search" id="issueSearch" placeholder="Search records…"></div>
+        <div class="table-wrap"><table><thead><tr><th>ISSUE ID</th><th>BOOK</th><th>MEMBER</th><th>ISSUED ON</th><th>RETURNED ON</th><th>STATUS</th><th>ACTION</th></tr></thead><tbody id="issuesTable"><tr><td colspan="7" class="empty">Loading records…</td></tr></tbody></table></div>
+      </div>
+    </section>
+    <div id="toast" class="toast" role="status"></div>
+    <footer>LIBRARY MANAGEMENT SYSTEM <span>·</span> Academic Mini Project</footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
